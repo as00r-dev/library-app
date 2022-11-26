@@ -14,7 +14,7 @@
 	--xxxl-font: calc(var(--xxl-font) * var(--ratio));
 
 	--black: #121212;
-	--white: whitesmoke;
+	--white: rgba(245, 245, 255, 1);
 }
 
 /* Simple CSS Reset */
@@ -44,7 +44,8 @@ body {
 
 /* Container */
 .container {
-	background: transparent;
+	--white: rgba(245, 245, 245, 0.4);
+	background: var(--white);
 	backdrop-filter: blur(10px);
 	color: var(--black);
 	margin-bottom: min(1rem, 5%);
@@ -55,7 +56,6 @@ body {
 /* Typography */
 
 p {
-	margin-top: min(1rem, 5%);
 	font-size: var(--sm-font);
 }
 
@@ -91,6 +91,13 @@ form input {
 }
 
 .book {
-	width: 300px;
-	height: 400px;
+	width: 400px;
+	height: 600px;
+	background: var(--black);
+	color: var(--white);
+	display: flex;
+	gap: 16px;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
