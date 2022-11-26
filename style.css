@@ -30,7 +30,10 @@
 body {
 	line-height: 1.5;
 	font-family: "Poppins", sans-serif;
-	background: var(--black);
+	background: url(./background.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
@@ -41,7 +44,8 @@ body {
 
 /* Container */
 .container {
-	background: var(--white);
+	background: transparent;
+	backdrop-filter: blur(10px);
 	color: var(--black);
 	margin-bottom: min(1rem, 5%);
 	padding: 1.5rem clamp(1rem, 5%, 3rem);
