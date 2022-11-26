@@ -1,0 +1,92 @@
+/* Font */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+/* Typography Scale */
+:root {
+	--base-font: 16px;
+	--ratio: 1.2;
+
+	--sm-font: var(--base-font);
+	--md-font: calc(var(--base-font) * var(--ratio));
+	--lg-font: calc(var(--md-font) * var(--ratio));
+	--xl-font: calc(var(--lg-font) * var(--ratio));
+	--xxl-font: calc(var(--xl-font) * var(--ratio));
+	--xxxl-font: calc(var(--xxl-font) * var(--ratio));
+
+	--black: #121212;
+	--white: whitesmoke;
+}
+
+/* Simple CSS Reset */
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+/* Body */
+body {
+	line-height: 1.5;
+	font-family: "Poppins", sans-serif;
+	background: var(--black);
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 1.5rem clamp(1rem, 5%, 3rem);
+}
+
+/* Container */
+.container {
+	background: var(--white);
+	color: var(--black);
+	margin-bottom: min(1rem, 5%);
+	padding: 1.5rem clamp(1rem, 5%, 3rem);
+	border-radius: 8px;
+}
+
+/* Typography */
+
+p {
+	margin-top: min(1rem, 5%);
+	font-size: var(--sm-font);
+}
+
+h1 {
+	font-size: var(--xxxl-font);
+	line-height: 1.3;
+}
+
+/* Input */
+
+form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 8px;
+}
+
+form input {
+	outline: 0;
+	border: 0;
+	padding: 0.5rem clamp(1rem, 5%, 3rem);
+}
+
+/* Bookshelf */
+
+.container.bookshelf {
+	width: 100%;
+	display: flex;
+	gap: 32px;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.book {
+	width: 300px;
+	height: 400px;
+}
