@@ -169,7 +169,11 @@ function renderBooks() {
 	books.forEach((book) => {
 		const bookWrapper = document.createElement("div");
 		bookWrapper.classList.add("book");
-		bookWrapper.style.setProperty("--image", `url(${book.imageUrl})`);
+		if (isValidUrl(book.imageUrl)) {
+			bookWrapper.style.setProperty("--background", `url(${book.imageUrl})`);
+		} else {
+			bookWrapper.style.setProperty("--background", `var(--white`);
+		}
 		const bookName = document.createElement("div");
 		bookName.classList.add("book-name");
 		bookName.textContent = "Name: " + book.name;
@@ -185,6 +189,7 @@ function renderBooks() {
 		const editPagesInput = document.createElement("input");
 		editPagesInput.placeholder = "Write updated pages read";
 		editPagesInput.id = book.name;
+		editPagesInput.classList.add("edit-pages-input");
 		editPagesInput.type = "number";
 		const editPagesRead = document.createElement("button");
 		editPagesRead.textContent = "Edit Pages Read";
@@ -265,6 +270,20 @@ function updatePagesRead(e) {
 		clearScreen();
 		renderBooks();
 	});
+}
+
+// Check valid url
+function isValidUrl(urlString) {
+	var urlPattern = new RegExp(
+		"^(https?:\\/\\/)?" + // validate protocol
+			"((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // validate domain name
+			"((\\d{1,3}\\.){3}\\d{1,3}))" + // validate OR ip (v4) address
+			"(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // validate port and path
+			"(\\?[;&a-z\\d%_.~+=-]*)?" + // validate query string
+			"(\\#[-a-z\\d_]*)?$",
+		"i"
+	); // validate fragment locator
+	return !!urlPattern.test(urlString);
 }
 
 // Call render book to render initial books

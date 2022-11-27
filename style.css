@@ -82,7 +82,6 @@ input[type="submit"]:hover,
 button:hover {
 	color: var(--black);
 	background: var(--white);
-	outline: 2px solid var(--black);
 }
 
 /* Input */
@@ -167,10 +166,17 @@ form input {
 
 .book > * {
 	position: relative;
+}
+
+.book .edit-pages-input,
+.book .edit-page-read,
+.book .delete-book {
 	opacity: 0;
 }
 
-.book:hover > * {
+.book:hover .edit-pages-input,
+.book:hover .edit-page-read,
+.book:hover .delete-book {
 	opacity: 1;
 }
 
@@ -181,7 +187,7 @@ form input {
 	left: 0;
 	bottom: 0;
 	right: 0;
-	background: var(--image);
+	background: var(--background);
 	background-size: cover;
 	background-position: center center;
 	background-repeat: no-repeat;
@@ -195,7 +201,7 @@ form input {
 
 .book div {
 	--white: whitesmoke;
-	background: var(--black);
+	background: rebeccapurple;
 	padding: 16px;
 	color: var(--white);
 }
@@ -243,6 +249,7 @@ header {
 
 .filter.container .filter-option {
 	background: var(--white);
+	color: rebeccapurple;
 	padding: 8px 16px;
 	border-radius: 8px;
 	cursor: pointer;
@@ -251,14 +258,4 @@ header {
 
 .filter.container .filter-option:hover {
 	transform: scale(1.05);
-}
-
-@media (hover: none) {
-	.book > * {
-		opacity: 1;
-	}
-
-	.book::before {
-		filter: blur(6px) grayscale(100%);
-	}
 }
