@@ -206,6 +206,12 @@ form input {
 	color: var(--white);
 }
 
+.book input {
+	padding: 8px 16px;
+	outline: 0;
+	border: 0;
+}
+
 /* Header */
 header .logo img {
 	width: 75px;
