@@ -14,18 +14,36 @@
 				<img src="./logo.png" alt="Logo" />
 			</div>
 			<div class="add-book">
-				<button>Add Book</button>
+				<button>New Book</button>
 			</div>
 		</header>
 		<div class="input">
-			<div class="cross">X</div>
 			<form action="">
-				<input type="text" placeholder="Book Name" />
-				<input type="text" placeholder="Author" />
-				<input type="number" placeholder="Total Pages" />
-				<input type="number" placeholder="Pages Read" />
+				<div class="cross">X</div>
+				<input type="text" class="name" placeholder="Book Name" />
+				<input type="text" class="author" placeholder="Author" />
+				<input type="number" class="total-pages" placeholder="Total Pages" />
+				<input type="number" class="pages-read" placeholder="Pages Read" />
+				<input type="url" class="image-url" placeholder="image url" />
 				<input type="submit" value="Add Book" />
 			</form>
+		</div>
+		<div class="filter container">
+			<div class="filter-option read">
+				<span class="label">Finished: </span>
+				<span class="read-books">98</span>/
+				<span class="total-books">100</span>
+			</div>
+			<div class="filter-option reading">
+				<span class="label">Reading: </span>
+				<span class="reading-books">98</span>/
+				<span class="total-books">100</span>
+			</div>
+			<div class="filter-option to-read">
+				<span class="label">To-Read: </span>
+				<span class="to-read-books">98</span>/
+				<span class="total-books">100</span>
+			</div>
 		</div>
 		<div class="container bookshelf">
 			<div class="book">

@@ -15,6 +15,7 @@
 
 	--black: #121212;
 	--white: rgba(245, 245, 255, 1);
+	--red: rgb(218, 77, 77);
 }
 
 /* Simple CSS Reset */
@@ -38,7 +39,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
+	justify-content: flex-start;
 }
 
 /* Container */
@@ -86,25 +87,20 @@ button:hover {
 /* Input */
 
 .cross {
-	width: 75px;
-	height: 75px;
+	width: 48px;
+	height: 48px;
 	position: absolute;
-	top: 16px;
-	right: 16px;
 	cursor: pointer;
-	outline: 2px solid var(--black);
-	background: transparent;
-	color: var(--black);
+	background: var(--red);
+	color: var(--white);
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	border-radius: 50%;
 	transition: all 0.3s ease-in-out;
-}
-
-.cross:hover {
-	background: var(--black);
-	color: var(--white);
+	top: 0;
+	right: 0;
+	transform: translate(50%, -50%);
 }
 
 .input {
@@ -121,6 +117,7 @@ button:hover {
 }
 
 form {
+	position: relative;
 	padding: 16px;
 	background: var(--white);
 	border-radius: 8px;
@@ -142,13 +139,14 @@ form input {
 /* Bookshelf */
 
 .container.bookshelf {
-	width: 80%;
+	width: calc(100vw - 64px);
 	display: flex;
 	gap: 32px;
 	align-items: center;
 	justify-content: center;
 	flex-wrap: wrap;
-	margin: 16px 32px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
 }
 
 .book {
@@ -176,4 +174,29 @@ header {
 	justify-content: space-between;
 	padding: 1.5rem clamp(1rem, 5%, 3rem);
 	align-items: center;
+}
+
+/* Filter */
+
+.filter.container {
+	width: calc(100vw - 64px);
+	margin-bottom: 0;
+	margin-top: 32px;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+	display: flex;
+	justify-content: flex-end;
+	gap: 16px;
+}
+
+.filter.container .filter-option {
+	background: var(--white);
+	padding: 8px 16px;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: all 0.3s ease-in-out;
+}
+
+.filter.container .filter-option:hover {
+	transform: scale(1.05);
 }
