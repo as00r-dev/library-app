@@ -190,7 +190,7 @@ form input {
 }
 
 .book:hover::before {
-	filter: blur(6px) sepia(100%);
+	filter: blur(6px) grayscale(100%);
 }
 
 .book div {

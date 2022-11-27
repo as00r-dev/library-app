@@ -186,6 +186,7 @@ function renderBooks() {
 		totalPages.textContent = "Total Pages: " + book.totalPages;
 		const editPagesInput = document.createElement("input");
 		editPagesInput.placeholder = "Write updated pages read";
+		editPagesInput.id = book.name;
 		editPagesInput.type = "number";
 		const editPagesRead = document.createElement("button");
 		editPagesRead.textContent = "Edit Pages Read";
@@ -226,6 +227,14 @@ function renderBooks() {
 	deleteButtons.forEach((btn) => {
 		btn.addEventListener("click", deleteBookHandler);
 	});
+
+	const editPagesReadButtons = document.querySelectorAll(
+		".book button.edit-page-read"
+	);
+
+	editPagesReadButtons.forEach((btn) => {
+		btn.addEventListener("click", updatePagesRead);
+	});
 }
 
 function clearScreen() {
@@ -251,11 +260,15 @@ function deleteBookHandler(e) {
 }
 
 // Edit Pages Read
+const allInputs = document.querySelectorAll(".book input");
 
-const editPagesReadButtons = document.querySelectorAll(
-	".book button.edit-pages-read"
-);
-
-editPagesReadButtons.forEach((btn) => {
-	btn.addEventListener("click", updatePagesRead);
-});
+function updatePagesRead(e) {
+	const bookName = e.target.previousElementSibling.id;
+	books.forEach((book) => {
+		if (book.name === bookName) {
+			book.pagesRead = Number(e.target.previousElementSibling.value);
+		}
+		clearScreen();
+		renderBooks();
+	});
+}
