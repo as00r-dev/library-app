@@ -5,7 +5,6 @@ This project was made for The Odin Project Curriculum. We were supposed to make 
 ## Acknowledgements
 
 - [The Odin Project Prompt](https://www.theodinproject.com/lessons/node-path-javascript-library)
-- [Awesome README](https://github.com/matiassingers/awesome-readme)
 
 ## Tech Stack
 
