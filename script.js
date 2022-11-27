@@ -1,22 +1,18 @@
-// Make new book modal work
-
+// variables and selectors
 const newBook = document.querySelector("header button");
 const inputForm = document.querySelector(".input");
 const cross = document.querySelector(".cross");
-
-newBook.addEventListener("click", openModal);
-cross.addEventListener("click", closeModal);
-
-function openModal() {
-	inputForm.style.display = "flex";
-}
-
-function closeModal() {
-	inputForm.style.display = "none";
-}
-
-// Add book
-
+const addBook = document.querySelector("form input[type='submit'");
+const bookshelf = document.querySelector(".bookshelf");
+const filterRead = document.querySelector(".filter-option.read .read-books");
+const filterReading = document.querySelector(
+	".filter-option.reading .reading-books"
+);
+const filterToRead = document.querySelector(
+	".filter-option.to-read .to-read-books"
+);
+const allInputs = document.querySelectorAll(".book input");
+const filterAll = document.querySelector(".filter-option.all .all-books");
 const books = [
 	new Book(
 		"Crime and Punishment",
@@ -118,6 +114,21 @@ const books = [
 	),
 ];
 
+// Event Listeners
+newBook.addEventListener("click", openModal);
+cross.addEventListener("click", closeModal);
+addBook.addEventListener("click", addBookToArray);
+
+// Make new book modal work
+function openModal() {
+	inputForm.style.display = "flex";
+}
+
+function closeModal() {
+	inputForm.style.display = "none";
+}
+
+// Book Constructor
 function Book(name, author, totalPages, imageUrl, pagesRead) {
 	this.name = name;
 	this.author = author;
@@ -126,10 +137,7 @@ function Book(name, author, totalPages, imageUrl, pagesRead) {
 	this.imageUrl = imageUrl;
 }
 
-const addBook = document.querySelector("form input[type='submit'");
-
-addBook.addEventListener("click", addBookToArray);
-
+// Add Books from user input to array
 function addBookToArray(e) {
 	e.preventDefault();
 	const name = document.querySelector("form .name");
@@ -153,16 +161,6 @@ function addBookToArray(e) {
 }
 
 // Render Books from books array
-
-const bookshelf = document.querySelector(".bookshelf");
-const filterRead = document.querySelector(".filter-option.read .read-books");
-const filterReading = document.querySelector(
-	".filter-option.reading .reading-books"
-);
-const filterToRead = document.querySelector(
-	".filter-option.to-read .to-read-books"
-);
-const filterAll = document.querySelector(".filter-option.all .all-books");
 function renderBooks() {
 	let all = books.length;
 	let reading = 0;
@@ -237,14 +235,12 @@ function renderBooks() {
 	});
 }
 
+// Clear Screen before rendering books so no duplication occurs
 function clearScreen() {
 	bookshelf.innerHTML = "";
 }
 
-renderBooks();
-
 // Delete Book
-
 function deleteBookHandler(e) {
 	const bookName = e.target.value;
 	books.forEach((book) => {
@@ -260,8 +256,6 @@ function deleteBookHandler(e) {
 }
 
 // Edit Pages Read
-const allInputs = document.querySelectorAll(".book input");
-
 function updatePagesRead(e) {
 	const bookName = e.target.previousElementSibling.id;
 	books.forEach((book) => {
@@ -272,3 +266,6 @@ function updatePagesRead(e) {
 		renderBooks();
 	});
 }
+
+// Call render book to render initial books
+renderBooks();
