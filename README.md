@@ -10,3 +10,10 @@ This project was made for The Odin Project Curriculum. We were supposed to make 
 ## Tech Stack
 
 **Client:** HTML, CSS and Vanilla JS.
+
+## Todo
+
+1.) Make filter buttons work.
+2.) Add profile creation
+3.) Connect with database.
+4.) Use API to get book covers.

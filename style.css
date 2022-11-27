@@ -236,7 +236,8 @@ header {
 	border-bottom-left-radius: 0;
 	border-bottom-right-radius: 0;
 	display: flex;
-	justify-content: flex-end;
+	flex-wrap: wrap;
+	justify-content: center;
 	gap: 16px;
 }
 
@@ -250,4 +251,14 @@ header {
 
 .filter.container .filter-option:hover {
 	transform: scale(1.05);
+}
+
+@media (hover: none) {
+	.book > * {
+		opacity: 1;
+	}
+
+	.book::before {
+		filter: blur(6px) grayscale(100%);
+	}
 }
