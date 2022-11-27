@@ -152,13 +152,43 @@ form input {
 .book {
 	width: 400px;
 	height: 600px;
-	background: var(--black);
-	color: var(--white);
+	color: var(--black);
 	display: flex;
 	gap: 16px;
 	flex-direction: column;
 	justify-content: center;
-	align-items: center;
+	align-items: flex-start;
+	position: relative;
+	transition: all 0.3s ease-in-out;
+	padding: 0 64px;
+}
+
+.book > * {
+	position: relative;
+	opacity: 0;
+}
+
+.book:hover > * {
+	opacity: 1;
+}
+
+.book::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background: var(--image);
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	filter: blur(0px);
+	cursor: pointer;
+}
+
+.book:hover::before {
+	filter: blur(6px);
 }
 
 /* Header */
