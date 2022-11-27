@@ -184,7 +184,22 @@ function renderBooks() {
 		const totalPages = document.createElement("div");
 		totalPages.classList.add("total-pages");
 		totalPages.textContent = "Total Pages: " + book.totalPages;
-		bookWrapper.append(bookName, authorName, readPages, totalPages);
+		const editPagesRead = document.createElement("button");
+		editPagesRead.textContent = "Edit Pages Read";
+		editPagesRead.value = book.name;
+		editPagesRead.classList.add("edit-page-read");
+		const deleteBook = document.createElement("button");
+		deleteBook.classList.add("delete-book");
+		deleteBook.textContent = "Delete";
+		deleteBook.value = book.name;
+		bookWrapper.append(
+			bookName,
+			authorName,
+			readPages,
+			totalPages,
+			editPagesRead,
+			deleteBook
+		);
 		bookshelf.appendChild(bookWrapper);
 		if (book.pagesRead === 0) {
 			notStarted++;
@@ -202,6 +217,11 @@ function renderBooks() {
 		filterAll.innerHTML = "";
 		filterAll.textContent = all;
 	});
+	const deleteButtons = document.querySelectorAll(".book button.delete-book");
+
+	deleteButtons.forEach((btn) => {
+		btn.addEventListener("click", deleteBookHandler);
+	});
 }
 
 function clearScreen() {
@@ -209,3 +229,20 @@ function clearScreen() {
 }
 
 renderBooks();
+
+// Delete Book
+
+function deleteBookHandler(e) {
+	const bookName = e.target.value;
+	books.forEach((book) => {
+		if (book.name === bookName) {
+			const index = books.indexOf(book);
+			console.log(index);
+			if (index > -1) {
+				books.splice(index, 1);
+			}
+		}
+		clearScreen();
+		renderBooks();
+	});
+}

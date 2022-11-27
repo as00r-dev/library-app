@@ -67,6 +67,7 @@ h1 {
 
 input[type="submit"],
 button {
+	--white: whitesmoke;
 	padding: 8px 16px;
 	background: var(--black);
 	color: var(--white);
@@ -152,7 +153,8 @@ form input {
 .book {
 	width: 400px;
 	height: 600px;
-	color: var(--black);
+	font-weight: 500;
+	font-size: var(--md-font);
 	display: flex;
 	gap: 16px;
 	flex-direction: column;
@@ -160,7 +162,7 @@ form input {
 	align-items: flex-start;
 	position: relative;
 	transition: all 0.3s ease-in-out;
-	padding: 0 64px;
+	padding: 0 32px;
 }
 
 .book > * {
@@ -188,7 +190,20 @@ form input {
 }
 
 .book:hover::before {
-	filter: blur(6px);
+	filter: blur(6px) sepia(100%);
+}
+
+.book div {
+	--white: whitesmoke;
+	background: var(--black);
+	padding: 16px;
+	color: var(--white);
+}
+
+.delete-book {
+	--white: whitesmoke;
+	background: var(--red);
+	color: var(--white);
 }
 
 /* Header */
