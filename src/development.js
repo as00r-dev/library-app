@@ -8,11 +8,11 @@ class Book {
 		this._imageUrl = imageUrl;
 	}
 
-	get bookDetails() {
+	showBookDetails() {
 		return this;
 	}
 
-	set bookDetails(obj) {
+	updateBookDetails(obj) {
 		if (obj.name) this._name = obj.name;
 		if (obj.author) this._author = obj.author;
 		if (obj.pagesRead) this._pagesRead = obj.pagesRead;
@@ -31,11 +31,11 @@ class Library {
 		this._toStartBooks = 0;
 	}
 
-	get bookList() {
+	showBookList() {
 		return this._bookList;
 	}
 
-	set bookList(book) {
+	pushToBookList(book) {
 		this._bookList.push(book);
 	}
 
@@ -140,10 +140,11 @@ class Library {
 				315
 			),
 		];
-
-		dummyBooks.forEach((book) => {
-			this._bookList.push(book);
-		});
+		if (this._bookList.length === 0) {
+			dummyBooks.forEach((book) => {
+				this._bookList.push(book);
+			});
+		}
 	}
 
 	countBookStats() {
@@ -159,3 +160,156 @@ class Library {
 		});
 	}
 }
+
+// library object
+const library = new Library();
+library.addDummyBooks();
+
+// ui class
+class ui {
+	newBook = document.querySelector("header button");
+	inputForm = document.querySelector(".input");
+	cross = document.querySelector(".cross");
+	addBook = document.querySelector("form input[type='submit'");
+	bookshelf = document.querySelector(".bookshelf");
+	filterRead = document.querySelector(".filter-option.read .read-books");
+	filterReading = document.querySelector(
+		".filter-option.reading .reading-books"
+	);
+	filterToRead = document.querySelector(
+		".filter-option.to-read .to-read-books"
+	);
+	allInputs = document.querySelectorAll(".book input");
+	filterAll = document.querySelector(".filter-option.all .all-books");
+	constructor() {
+		// cache dom elements
+	}
+
+	// add event listeners
+	addEventListeners() {
+		this.newBook.addEventListener("click", (e) => {
+			this.inputForm.style.display = "flex";
+		});
+		this.cross.addEventListener("click", (e) => {
+			this.inputForm.style.display = "none";
+		});
+		this.addBook.addEventListener("click", (e) => {
+			// weird right?
+			const dc = new ui();
+			e.preventDefault();
+			const name = document.querySelector("form .name");
+			const author = document.querySelector("form .author");
+			const totalPages = document.querySelector("form .total-pages");
+			const pagesRead = document.querySelector("form .pages-read");
+			const imageUrl = document.querySelector("form .image-url");
+			if (name.value && author.value && totalPages && pagesRead && imageUrl) {
+				const inputBook = new Book(
+					name.value,
+					author.value,
+					Number(totalPages.value),
+					imageUrl.value,
+					Number(pagesRead.value)
+				);
+				library.showBookList().push(inputBook);
+			}
+			this.inputForm.style.display = "none";
+			dc.bookshelf.innerHTML = "";
+			dc.renderBooks();
+		});
+	}
+
+	// manage book deletion
+	deleteBookHandler(e) {
+		const dc = new ui();
+		const bookName = e.target.value;
+		library._bookList.forEach((book) => {
+			if (book._name === bookName) {
+				const index = library._bookList.indexOf(book);
+				if (index > -1) {
+					library._bookList.splice(index, 1);
+				}
+			}
+		});
+		dc.renderBooks();
+	}
+
+	//update pages read
+	updatePagesRead(e) {
+		const dc = new ui();
+		const bookName = e.target.previousElementSibling.id;
+		library._bookList.forEach((book) => {
+			if (book._name === bookName) {
+				book._pagesRead = Number(e.target.previousElementSibling.value);
+			}
+		});
+		dc.renderBooks();
+	}
+
+	// render books
+	renderBooks() {
+		this.bookshelf.innerHTML = "";
+		const books = library.showBookList();
+		books.forEach((book) => {
+			this.createBookElement(book);
+		});
+		const deleteButtons = document.querySelectorAll(".book button.delete-book");
+
+		deleteButtons.forEach((btn) => {
+			btn.addEventListener("click", this.deleteBookHandler);
+		});
+
+		const editPagesReadButtons = document.querySelectorAll(
+			".book button.edit-page-read"
+		);
+
+		editPagesReadButtons.forEach((btn) => {
+			btn.addEventListener("click", this.updatePagesRead);
+		});
+	}
+
+	// create a book ui element
+	createBookElement(book) {
+		const bookElemWrapper = document.createElement("div");
+		bookElemWrapper.classList.add("book");
+		bookElemWrapper.style.setProperty("--background", `url(${book._imageUrl}`);
+		const bookName = document.createElement("div");
+		bookName.classList.add("book-name");
+		bookName.textContent = "Name: " + book._name;
+		const authorName = document.createElement("div");
+		authorName.classList.add("author");
+		authorName.textContent = "Author: " + book._author;
+		const readPages = document.createElement("div");
+		readPages.classList.add("read-pages");
+		readPages.textContent = "Pages Read: " + book._pagesRead;
+		const totalPages = document.createElement("div");
+		totalPages.classList.add("total-pages");
+		totalPages.textContent = "Total Pages: " + book._totalPages;
+		const editPagesInput = document.createElement("input");
+		editPagesInput.placeholder = "Write updated pages read";
+		editPagesInput.id = book._name;
+		editPagesInput.classList.add("edit-pages-input");
+		editPagesInput.type = "number";
+		const editPagesRead = document.createElement("button");
+		editPagesRead.textContent = "Edit Pages Read";
+		editPagesRead.value = book._name;
+		editPagesRead.classList.add("edit-page-read");
+		const deleteBook = document.createElement("button");
+		deleteBook.classList.add("delete-book");
+		deleteBook.textContent = "Delete";
+		deleteBook.value = book._name;
+		bookElemWrapper.append(
+			bookName,
+			authorName,
+			readPages,
+			totalPages,
+			editPagesInput,
+			editPagesRead,
+			deleteBook
+		);
+		this.bookshelf.appendChild(bookElemWrapper);
+	}
+}
+
+const displayController = new ui();
+displayController.addEventListeners();
+displayController.renderBooks();
